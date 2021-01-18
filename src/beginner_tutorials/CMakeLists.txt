@@ -25,13 +25,13 @@ catkin_package()
 ## Build talker and listener
 include_directories(include ${catkin_INCLUDE_DIRS})
 # 빌드 시 필요한 header가 들어있는 directory들
-# ${catkin_INCLUDE_DIRS}:저 위 find package에서 선언한 친구들 (catkin과 그에 덧붙혀진 roscpp...등)의 include 폴더까지 포함시킨다.
+# ${catkin_INCLUDE_DIRS}:_INCLUDE DIRS를 붙히면, catkin과 그 하위로 딸려있는 roscpp...등의 include 폴더까지 포함시킨다.
 # include: include 폴더를 사용
 
 # 각 실행파일(노드) 을 빌드할때 필요한 옵션들
-add_executable(talker src/talker.cpp) ## talker 라는 이름의 노드를 만들껀데, 참고할 소스코드는 src/talker.cpp 파일을 참고할꺼야
-target_link_libraries(talker ${catkin_LIBRARIES}) # target: 빌드된 실행파일. 빌드된 실행파일이 어떤 라이블러리에 링크 되어 있는지를
-add_dependencies(talker beginner_tutorials_generate_messages_cpp) # 노드를 만들때 이런 dependencies를 참고해라. 먼저 이걸 실행해서 메세지를 만든 다음에 talker를 빌드해라.
+add_executable(talker src/talker.cpp) ## talker 라는 이름의 실행파일(타겟, 노드)를 만들껀데, 참고할 소스코드는 src/talker.cpp 파일을 참고할꺼야(볶수개 코드도 지정 가능)
+target_link_libraries(talker ${catkin_LIBRARIES}) # target: 빌드된 실행파일. talker라는 이름의 실행파일(타겟, 노드)을 빌드 할껀데, 빌드할 실행파일이 어떤 라이브러리에 링크 되어 있는지지를 작섷ㅇ.
+add_dependencies(talker beginner_tutorials_generate_messages_cpp) # 빌드할때 메세지나 서비스, dynamic_reconfigure 파라미터를 새로 생성하여 사용할경우, 노드를 만들때 이런 dependencies를 참고해라. 먼저 이걸 실행해서 메세지를 만든 다음에 talker를 빌드해라.
 
 add_executable(listener src/listener.cpp)
 target_link_libraries(listener ${catkin_LIBRARIES})
